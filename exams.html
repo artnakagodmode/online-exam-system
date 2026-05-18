@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ExamPro — Exams</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/dashboard.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand"><span class="brand-icon">⬡</span><span>ExamPro</span></div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">▦</span> Dashboard</a>
+        <a href="exams.html" class="nav-item active"><span class="nav-icon">📋</span> Exams</a>
+        <a href="questions.html" class="nav-item"><span class="nav-icon">❓</span> Questions</a>
+        <a href="students.html" class="nav-item"><span class="nav-icon">👥</span> Students</a>
+        <a href="results.html" class="nav-item"><span class="nav-icon">📊</span> Results</a>
+        <a href="settings.html" class="nav-item"><span class="nav-icon">⚙</span> Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-pill"><div class="avatar">A</div><div><div class="user-name">Admin</div><div class="user-role">Administrator</div></div></div>
+        <button class="btn-logout" onclick="logout()">⏻ Logout</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <h2 class="page-title">Exams</h2>
+        <div class="topbar-right">
+          <button class="btn-primary" onclick="openExamModal()">+ Add Exam</button>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <div class="card">
+          <div class="card-header">
+            <input type="text" id="examSearch" placeholder="🔍 Search exams..." class="search-input" oninput="renderExams()"/>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr><th>#</th><th>Exam Name</th><th>Subject</th><th>Duration (min)</th><th>Pass %</th><th>Questions</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="examsTbl"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Exam Modal -->
+  <div class="modal-overlay hidden" id="examModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="examModalTitle">Add Exam</h3>
+        <button class="modal-close" onclick="closeExamModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="examId"/>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Exam Name *</label>
+            <input type="text" id="examName" placeholder="e.g. Midterm Exam"/>
+          </div>
+          <div class="form-group">
+            <label>Subject *</label>
+            <input type="text" id="examSubject" placeholder="e.g. Mathematics"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Duration (minutes) *</label>
+            <input type="number" id="examDuration" placeholder="60" min="1"/>
+          </div>
+          <div class="form-group">
+            <label>Passing Score (%)</label>
+            <input type="number" id="examPass" placeholder="60" min="0" max="100"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Start Date</label>
+            <input type="datetime-local" id="examStart"/>
+          </div>
+          <div class="form-group">
+            <label>End Date</label>
+            <input type="datetime-local" id="examEnd"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea id="examDesc" rows="3" placeholder="Brief description..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Status</label>
+          <select id="examStatus">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="draft">Draft</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeExamModal()">Cancel</button>
+        <button class="btn-primary" onclick="saveExam()">Save Exam</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/exams.js"></script>
+</body>
+</html>

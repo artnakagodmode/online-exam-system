@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ExamPro — Questions</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/dashboard.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand"><span class="brand-icon">⬡</span><span>ExamPro</span></div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">▦</span> Dashboard</a>
+        <a href="exams.html" class="nav-item"><span class="nav-icon">📋</span> Exams</a>
+        <a href="questions.html" class="nav-item active"><span class="nav-icon">❓</span> Questions</a>
+        <a href="students.html" class="nav-item"><span class="nav-icon">👥</span> Students</a>
+        <a href="results.html" class="nav-item"><span class="nav-icon">📊</span> Results</a>
+        <a href="settings.html" class="nav-item"><span class="nav-icon">⚙</span> Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-pill"><div class="avatar">A</div><div><div class="user-name">Admin</div><div class="user-role">Administrator</div></div></div>
+        <button class="btn-logout" onclick="logout()">⏻ Logout</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <h2 class="page-title">Questions</h2>
+        <div class="topbar-right">
+          <button class="btn-primary" onclick="openQModal()">+ Add Question</button>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <div class="card">
+          <div class="card-header">
+            <input type="text" id="qSearch" placeholder="🔍 Search questions..." class="search-input" oninput="renderQuestions()"/>
+            <select id="qExamFilter" class="select-filter" onchange="renderQuestions()">
+              <option value="">All Exams</option>
+            </select>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr><th>#</th><th>Question</th><th>Type</th><th>Exam</th><th>Points</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="questionsTbl"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Question Modal -->
+  <div class="modal-overlay hidden" id="qModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3 id="qModalTitle">Add Question</h3>
+        <button class="modal-close" onclick="closeQModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="qId"/>
+        <div class="form-row">
+          <div class="form-group flex2">
+            <label>Question Text *</label>
+            <textarea id="qText" rows="3" placeholder="Enter your question here..."></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Question Type</label>
+            <select id="qType" onchange="toggleQType()">
+              <option value="mcq">Multiple Choice (MCQ)</option>
+              <option value="truefalse">True / False</option>
+              <option value="identification">Identification</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Assign to Exam *</label>
+            <select id="qExam"></select>
+          </div>
+          <div class="form-group">
+            <label>Points</label>
+            <input type="number" id="qPoints" value="1" min="1"/>
+          </div>
+        </div>
+
+        <!-- MCQ Options -->
+        <div id="mcqOptions">
+          <label>Answer Choices (mark correct one)</label>
+          <div class="choices-list" id="choicesList"></div>
+          <button class="btn-secondary btn-sm" onclick="addChoice()">+ Add Choice</button>
+        </div>
+
+        <!-- True/False -->
+        <div id="tfOptions" class="hidden">
+          <label>Correct Answer</label>
+          <div class="radio-group">
+            <label><input type="radio" name="tfAnswer" value="True"/> True</label>
+            <label><input type="radio" name="tfAnswer" value="False"/> False</label>
+          </div>
+        </div>
+
+        <!-- Identification -->
+        <div id="identOptions" class="hidden">
+          <div class="form-group">
+            <label>Correct Answer *</label>
+            <input type="text" id="identAnswer" placeholder="Enter the correct answer"/>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeQModal()">Cancel</button>
+        <button class="btn-primary" onclick="saveQuestion()">Save Question</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/questions.js"></script>
+</body>
+</html>

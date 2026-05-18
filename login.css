@@ -1,0 +1,125 @@
+/* ===== Login Styles ===== */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.login-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: .35;
+  animation: drift 10s ease-in-out infinite;
+}
+.orb1 {
+  width: 450px; height: 450px;
+  background: radial-gradient(circle, #4f7cff 0%, transparent 70%);
+  top: -100px; left: -100px;
+}
+.orb2 {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, #a855f7 0%, transparent 70%);
+  bottom: -80px; right: 0;
+  animation-delay: -4s;
+}
+.orb3 {
+  width: 250px; height: 250px;
+  background: radial-gradient(circle, #22c55e 0%, transparent 70%);
+  top: 50%; left: 55%;
+  animation-delay: -7s;
+}
+
+@keyframes drift {
+  0%,100% { transform: translate(0,0) scale(1); }
+  33%      { transform: translate(30px,-30px) scale(1.05); }
+  66%      { transform: translate(-20px,20px) scale(.95); }
+}
+
+.login-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: slideUp .5s ease;
+}
+
+.login-brand {
+  text-align: center;
+}
+.login-brand .brand-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: .4rem;
+  color: var(--accent);
+  filter: drop-shadow(0 0 16px var(--accent));
+}
+.login-brand h1 {
+  font-size: 2.2rem;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  letter-spacing: -.03em;
+  color: var(--text);
+}
+.login-brand p {
+  font-size: .85rem;
+  color: var(--text-muted);
+  margin-top: .2rem;
+}
+
+.login-card {
+  background: rgba(26,30,41,.85);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  backdrop-filter: blur(16px);
+  box-shadow: var(--shadow);
+}
+.login-card h2 {
+  font-size: 1.4rem;
+  margin-bottom: .2rem;
+}
+.login-sub {
+  color: var(--text-muted);
+  font-size: .875rem;
+  margin-bottom: 1.5rem;
+}
+
+.pw-wrap {
+  position: relative;
+}
+.pw-wrap input {
+  padding-right: 2.8rem;
+}
+.pw-toggle {
+  position: absolute;
+  right: .7rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+
+.login-hint {
+  text-align: center;
+  margin-top: 1.2rem;
+  color: var(--text-muted);
+  font-size: .8rem;
+}

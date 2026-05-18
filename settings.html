@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ExamPro — Settings</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/dashboard.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand"><span class="brand-icon">⬡</span><span>ExamPro</span></div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">▦</span> Dashboard</a>
+        <a href="exams.html" class="nav-item"><span class="nav-icon">📋</span> Exams</a>
+        <a href="questions.html" class="nav-item"><span class="nav-icon">❓</span> Questions</a>
+        <a href="students.html" class="nav-item"><span class="nav-icon">👥</span> Students</a>
+        <a href="results.html" class="nav-item"><span class="nav-icon">📊</span> Results</a>
+        <a href="settings.html" class="nav-item active"><span class="nav-icon">⚙</span> Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-pill"><div class="avatar">A</div><div><div class="user-name">Admin</div><div class="user-role">Administrator</div></div></div>
+        <button class="btn-logout" onclick="logout()">⏻ Logout</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <h2 class="page-title">Settings</h2>
+      </header>
+
+      <div class="content-body">
+        <div class="settings-grid">
+
+          <!-- System Info -->
+          <div class="card settings-card">
+            <div class="settings-section-title">🏫 System Information</div>
+            <div class="form-group">
+              <label>School / Institution Name</label>
+              <input type="text" id="schoolName" placeholder="Your School Name"/>
+            </div>
+            <div class="form-group">
+              <label>System Title</label>
+              <input type="text" id="sysTitle" placeholder="Online Examination System"/>
+            </div>
+            <div class="form-group">
+              <label>School Year</label>
+              <input type="text" id="schoolYear" placeholder="2024–2025"/>
+            </div>
+            <div class="form-group">
+              <label>Semester / Term</label>
+              <input type="text" id="semester" placeholder="1st Semester"/>
+            </div>
+            <button class="btn-primary" onclick="saveSystemInfo()">Save Info</button>
+          </div>
+
+          <!-- Admin Account -->
+          <div class="card settings-card">
+            <div class="settings-section-title">🔐 Admin Account</div>
+            <div class="form-group">
+              <label>Admin Name</label>
+              <input type="text" id="adminName" value="Admin"/>
+            </div>
+            <div class="form-group">
+              <label>Username</label>
+              <input type="text" id="adminUsername" value="admin"/>
+            </div>
+            <div class="form-group">
+              <label>Current Password</label>
+              <input type="password" id="currPw" placeholder="Enter current password"/>
+            </div>
+            <div class="form-group">
+              <label>New Password</label>
+              <input type="password" id="newPw" placeholder="Enter new password"/>
+            </div>
+            <div class="form-group">
+              <label>Confirm New Password</label>
+              <input type="password" id="confirmPw" placeholder="Confirm new password"/>
+            </div>
+            <div id="pwMsg" class="hidden"></div>
+            <button class="btn-primary" onclick="changePassword()">Update Password</button>
+          </div>
+
+          <!-- Exam Defaults -->
+          <div class="card settings-card">
+            <div class="settings-section-title">📋 Exam Defaults</div>
+            <div class="form-group">
+              <label>Default Duration (minutes)</label>
+              <input type="number" id="defaultDuration" value="60" min="1"/>
+            </div>
+            <div class="form-group">
+              <label>Default Passing Score (%)</label>
+              <input type="number" id="defaultPass" value="60" min="0" max="100"/>
+            </div>
+            <div class="form-group">
+              <label>Shuffle Questions</label>
+              <select id="shuffleQ">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Shuffle Choices</label>
+              <select id="shuffleC">
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Show Result After Exam</label>
+              <select id="showResult">
+                <option value="yes">Yes – show immediately</option>
+                <option value="no">No – admin releases</option>
+              </select>
+            </div>
+            <button class="btn-primary" onclick="saveExamDefaults()">Save Defaults</button>
+          </div>
+
+          <!-- Data Management -->
+          <div class="card settings-card">
+            <div class="settings-section-title">🗄 Data Management</div>
+            <p class="settings-desc">Export or reset system data. Be careful — resets are irreversible.</p>
+            <div class="btn-stack">
+              <button class="btn-secondary" onclick="exportAllData()">⬇ Export All Data (JSON)</button>
+              <button class="btn-danger" onclick="confirmReset()">🗑 Reset All Data</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/settings.js"></script>
+</body>
+</html>

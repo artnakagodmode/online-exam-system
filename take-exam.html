@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ExamPro — Take Exam</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/exam-take.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body class="exam-body">
+
+  <!-- Student Login -->
+  <div id="studentLoginView" class="center-view">
+    <div class="login-bg"><div class="orb orb1"></div><div class="orb orb2"></div></div>
+    <div class="login-container">
+      <div class="login-brand">
+        <div class="brand-icon">⬡</div>
+        <h1>ExamPro</h1>
+        <p>Student Portal</p>
+      </div>
+      <div class="login-card">
+        <h2>Student Sign In</h2>
+        <div id="sLoginErr" class="alert alert-error hidden">Invalid credentials.</div>
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="sUsername" placeholder="Student username"/>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="sPassword" placeholder="Password"/>
+        </div>
+        <button class="btn-primary btn-full" onclick="studentLogin()">Sign In</button>
+        <div class="login-hint"><small><a href="index.html">← Admin Login</a></small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exam Lobby -->
+  <div id="examLobbyView" class="hidden">
+    <div class="layout">
+      <main class="main-content" style="margin-left:0">
+        <header class="topbar">
+          <h2 class="page-title">Available Exams</h2>
+          <div class="topbar-right">
+            <span id="sStudentName" class="badge-time"></span>
+            <button class="btn-logout" onclick="studentLogout()">⏻ Logout</button>
+          </div>
+        </header>
+        <div class="content-body">
+          <div id="availableExams" class="exam-card-grid"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Active Exam -->
+  <div id="activeExamView" class="hidden">
+    <div class="exam-header">
+      <div class="exam-header-left">
+        <span class="brand-icon">⬡</span>
+        <span id="activeExamTitle">Exam</span>
+      </div>
+      <div class="exam-header-center">
+        Question <span id="qCurrent">1</span> of <span id="qTotal">0</span>
+      </div>
+      <div class="exam-header-right">
+        ⏱ <span id="examTimer" class="timer">00:00</span>
+      </div>
+    </div>
+
+    <div class="exam-body-content">
+      <div class="exam-progress-bar"><div id="progressFill" class="progress-fill"></div></div>
+
+      <div class="question-card">
+        <div class="q-number" id="qNumLabel">Question 1</div>
+        <div class="q-points" id="qPointsLabel">1 point</div>
+        <div class="q-text" id="qTextDisplay"></div>
+        <div class="q-choices" id="qChoicesDisplay"></div>
+      </div>
+
+      <div class="exam-nav">
+        <button class="btn-secondary" id="prevBtn" onclick="prevQuestion()">← Previous</button>
+        <div class="q-nav-dots" id="qNavDots"></div>
+        <button class="btn-primary" id="nextBtn" onclick="nextQuestion()">Next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Result View -->
+  <div id="examResultView" class="hidden center-view">
+    <div class="result-card">
+      <div class="result-icon" id="resultIcon">🎉</div>
+      <h2 id="resultTitle">Exam Complete!</h2>
+      <div class="result-score" id="resultScore"></div>
+      <div class="result-details" id="resultDetails"></div>
+      <div class="result-review" id="resultReview"></div>
+      <button class="btn-primary" onclick="backToLobby()">Back to Exams</button>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/take-exam.js"></script>
+</body>
+</html>

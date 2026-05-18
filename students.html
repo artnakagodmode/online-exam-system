@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ExamPro — Students</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/dashboard.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand"><span class="brand-icon">⬡</span><span>ExamPro</span></div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">▦</span> Dashboard</a>
+        <a href="exams.html" class="nav-item"><span class="nav-icon">📋</span> Exams</a>
+        <a href="questions.html" class="nav-item"><span class="nav-icon">❓</span> Questions</a>
+        <a href="students.html" class="nav-item active"><span class="nav-icon">👥</span> Students</a>
+        <a href="results.html" class="nav-item"><span class="nav-icon">📊</span> Results</a>
+        <a href="settings.html" class="nav-item"><span class="nav-icon">⚙</span> Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-pill"><div class="avatar">A</div><div><div class="user-name">Admin</div><div class="user-role">Administrator</div></div></div>
+        <button class="btn-logout" onclick="logout()">⏻ Logout</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <h2 class="page-title">Students</h2>
+        <div class="topbar-right">
+          <button class="btn-primary" onclick="openStudentModal()">+ Add Student</button>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <div class="card">
+          <div class="card-header">
+            <input type="text" id="studentSearch" placeholder="🔍 Search students..." class="search-input" oninput="renderStudents()"/>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr><th>#</th><th>Name</th><th>Student ID</th><th>Email</th><th>Course/Section</th><th>Exams Taken</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="studentsTbl"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Student Modal -->
+  <div class="modal-overlay hidden" id="studentModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3 id="studentModalTitle">Add Student</h3>
+        <button class="modal-close" onclick="closeStudentModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="studentId"/>
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" id="studentFirst" placeholder="Juan"/>
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" id="studentLast" placeholder="Dela Cruz"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Student ID *</label>
+            <input type="text" id="studentSID" placeholder="2024-00001"/>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="studentEmail" placeholder="student@school.edu"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Course</label>
+            <input type="text" id="studentCourse" placeholder="BSIT"/>
+          </div>
+          <div class="form-group">
+            <label>Section</label>
+            <input type="text" id="studentSection" placeholder="3A"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Username *</label>
+            <input type="text" id="studentUsername" placeholder="student login username"/>
+          </div>
+          <div class="form-group">
+            <label>Password *</label>
+            <input type="password" id="studentPassword" placeholder="student login password"/>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeStudentModal()">Cancel</button>
+        <button class="btn-primary" onclick="saveStudent()">Save Student</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/students.js"></script>
+</body>
+</html>

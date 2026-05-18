@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ExamPro — Results</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/dashboard.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand"><span class="brand-icon">⬡</span><span>ExamPro</span></div>
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-item"><span class="nav-icon">▦</span> Dashboard</a>
+        <a href="exams.html" class="nav-item"><span class="nav-icon">📋</span> Exams</a>
+        <a href="questions.html" class="nav-item"><span class="nav-icon">❓</span> Questions</a>
+        <a href="students.html" class="nav-item"><span class="nav-icon">👥</span> Students</a>
+        <a href="results.html" class="nav-item active"><span class="nav-icon">📊</span> Results</a>
+        <a href="settings.html" class="nav-item"><span class="nav-icon">⚙</span> Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-pill"><div class="avatar">A</div><div><div class="user-name">Admin</div><div class="user-role">Administrator</div></div></div>
+        <button class="btn-logout" onclick="logout()">⏻ Logout</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <h2 class="page-title">Results</h2>
+        <div class="topbar-right">
+          <button class="btn-secondary" onclick="exportResults()">⬇ Export CSV</button>
+        </div>
+      </header>
+
+      <div class="content-body">
+        <!-- Summary Cards -->
+        <div class="stats-grid" style="margin-bottom:1.5rem;">
+          <div class="stat-card accent-green">
+            <div class="stat-icon">✅</div>
+            <div class="stat-info">
+              <div class="stat-value" id="passCount">0</div>
+              <div class="stat-label">Passed</div>
+            </div>
+          </div>
+          <div class="stat-card accent-red">
+            <div class="stat-icon">❌</div>
+            <div class="stat-info">
+              <div class="stat-value" id="failCount">0</div>
+              <div class="stat-label">Failed</div>
+            </div>
+          </div>
+          <div class="stat-card accent-blue">
+            <div class="stat-icon">📈</div>
+            <div class="stat-info">
+              <div class="stat-value" id="avgScore">0%</div>
+              <div class="stat-label">Average Score</div>
+            </div>
+          </div>
+          <div class="stat-card accent-orange">
+            <div class="stat-icon">🏆</div>
+            <div class="stat-info">
+              <div class="stat-value" id="highScore">0%</div>
+              <div class="stat-label">Highest Score</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <input type="text" id="resultSearch" placeholder="🔍 Search results..." class="search-input" oninput="renderResults()"/>
+            <select id="resultExamFilter" class="select-filter" onchange="renderResults()">
+              <option value="">All Exams</option>
+            </select>
+          </div>
+          <table class="data-table">
+            <thead>
+              <tr><th>#</th><th>Student</th><th>Exam</th><th>Score</th><th>Percentage</th><th>Grade</th><th>Status</th><th>Date Taken</th><th>Actions</th></tr>
+            </thead>
+            <tbody id="resultsTbl"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Result Detail Modal -->
+  <div class="modal-overlay hidden" id="resultModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3>Result Details</h3>
+        <button class="modal-close" onclick="closeResultModal()">✕</button>
+      </div>
+      <div class="modal-body" id="resultDetailBody"></div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeResultModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/results.js"></script>
+</body>
+</html>
